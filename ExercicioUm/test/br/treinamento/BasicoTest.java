@@ -16,8 +16,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import com.sun.org.omg.CORBA.ExceptionDescription;
-
 import br.treinamento.Basico;
 
 public class BasicoTest {
