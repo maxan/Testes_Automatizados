@@ -15,4 +15,8 @@ public class Basico {
 	public int mdc(int i, int j, int k) {
 		return 0;
 	}
+	
+	public void lancarExcecao() throws Exception {
+		throw new Exception("Exceção no método com erro!");
+	}
 }

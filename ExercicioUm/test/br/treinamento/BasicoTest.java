@@ -96,4 +96,15 @@ public class BasicoTest {
 	public void infinito() {
 		while (true);
 	}
+	
+	@Test
+	public void testLancarExcecao() {
+		try {
+			negocio.lancarExcecao();
+			fail("Uma exceção deveria ter sido lançada.");
+		} catch (Exception e) {
+			//e.printStackTrace();
+			assertEquals(e.getMessage(), "Exceção no método com erro!");
+		}
+	}
 }
