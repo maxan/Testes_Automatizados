@@ -344,10 +344,132 @@ public class ExercicioJUnitTest {
 		testValidarRegras();
 	}
 	
-//	@Test
-//	public void testCalcDigVerif() throws Exception {
-//		Entidade entidadeActual;
-//		boolean respostaActual;
-//	}
+	@Test
+	public void testCalcDigVerif() throws Exception {
+		String cpfActual;
+		boolean respostaActual;
+		
+		// Cenário 1: dígito calculado correto.
+		cpfActual = "96257426111";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertTrue("Cenário 1: dígito calculado correto.", respostaActual);
+		
+		/// Cenário 1.1: dígito calculado correto.
+		cpfActual = "01353074307";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertTrue("Cenário 1.1: dígito calculado correto.", respostaActual);
+		
+		/// Cenário 1.2: dígito calculado correto.
+		cpfActual = "15484140005";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertTrue("Cenário 1.2: dígito calculado correto.", respostaActual);
+		
+		/// Cenário 1.3: dígito calculado correto.
+		cpfActual = "16754518340";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertTrue("Cenário 1.3: dígito calculado correto.", respostaActual);
+		
+		/// Cenário 1.4: dígito calculado correto.
+		cpfActual = "62152465300";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertTrue("Cenário 1.4: dígito calculado correto.", respostaActual);
+		
+		// Cenário 2: dígito calculado incorreto.
+		cpfActual = "96257426101";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertFalse("Cenário 2: dígito calculado incorreto.", respostaActual);
+	}
+	
+	@Test
+	public void testValidaCPF() throws Exception {
+		String cpfActual;
+		boolean respostaActual;
+		
+		testCalcDigVerif();
+		
+		// Cenário 1: CPF incorreto.
+		cpfActual = "12345678901";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertFalse("Cenário 1: CPF incorreto.", respostaActual);
+		
+		// Cenário 1.1: CPF incorreto (00000000000).
+		cpfActual = "00000000000";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertFalse("Cenário 1.1: CPF incorreto (00000000000).", respostaActual);
+		
+		// Cenário 1.2: CPF incorreto (tamanho menor que 11 dígitos).
+		cpfActual = "123";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertFalse("Cenário 1.2: CPF incorreto (tamanho menor que 11 dígitos).", respostaActual);
+		
+		// Cenário 1.3: CPF incorreto (11111111111).
+		cpfActual = "11111111111";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertFalse("Cenário 1.3: CPF incorreto (11111111111).", respostaActual);
+		
+		// Cenário 1.4: CPF incorreto (22222222222).
+		cpfActual = "22222222222";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertFalse("Cenário 1.4: CPF incorreto (22222222222).", respostaActual);
+		
+		// Cenário 1.5: CPF incorreto (33333333333).
+		cpfActual = "33333333333";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertFalse("Cenário 1.5: CPF incorreto (33333333333).", respostaActual);
+		
+		// Cenário 1.6: CPF incorreto (44444444444).
+		cpfActual = "44444444444";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertFalse("Cenário 1.6: CPF incorreto (44444444444).", respostaActual);
+		
+		// Cenário 1.7: CPF incorreto (55555555555).
+		cpfActual = "55555555555";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertFalse("Cenário 1.7: CPF incorreto (55555555555).", respostaActual);
+		
+		// Cenário 1.8: CPF incorreto (66666666666).
+		cpfActual = "66666666666";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertFalse("Cenário 1.8: CPF incorreto (66666666666).", respostaActual);
+		
+		// Cenário 1.9: CPF incorreto (77777777777).
+		cpfActual = "77777777777";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertFalse("Cenário 1.9: CPF incorreto (77777777777).", respostaActual);
+		
+		// Cenário 1.10: CPF incorreto (88888888888).
+		cpfActual = "88888888888";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertFalse("Cenário 1.10: CPF incorreto (88888888888).", respostaActual);
+		
+		// Cenário 1.11: CPF incorreto (99999999999).
+		cpfActual = "99999999999";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertFalse("Cenário 1.11: CPF incorreto (99999999999).", respostaActual);
+		
+		// Cenário 2: CPF correto.
+		cpfActual = "96257426111";
+		
+		respostaActual = classe.validaCPF(cpfActual);
+		assertTrue("Cenário 2: CPF correto.", respostaActual);
+	}
 
 }
