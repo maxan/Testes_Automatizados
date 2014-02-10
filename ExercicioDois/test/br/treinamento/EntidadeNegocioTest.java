@@ -12,6 +12,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+// Este exercício deve ter 100% de cobertura de código, mas não é necessário cobrir 100% dos branches.
+
 public class EntidadeNegocioTest {
 	private EntidadeNegocio classeNegocio;
 	private EntidadeDAOInterface persistencia;
@@ -38,8 +40,16 @@ public class EntidadeNegocioTest {
 		EasyMock.reset(persistencia);
 	}
 
+//	@Test
+//	public void testSalvar() throws Exception {
+//		Entidade entidadeActual;
+//		Entidade entidadeExpected;
+//		Entidade entidadeEntrada;
+//		
+//	}
+	
 	@Test
-	public void testSalvar() throws Exception {
+	public void testValidarCamposObrigatorios() throws Exception {
 		Entidade entidadeActual;
 		Entidade entidadeExpected;
 		Entidade entidadeEntrada;
@@ -59,6 +69,66 @@ public class EntidadeNegocioTest {
 		assertNotNull("Cenário 1: Salvamento com sucesso.", entidadeActual.getId());
 		
 		EasyMock.verify(persistencia);
+		
+		// Cenário 2: Tenta salvar com campo nome não preenchido.
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setNome(null);
+		
+		EasyMock.reset(persistencia);
+		EasyMock.replay(persistencia);
+		
+		try {
+			entidadeActual = classeNegocio.salvar(entidadeEntrada);
+			
+			fail("Cenário 2: Tenta salvar com campo nome não preenchido. O campo nome não deve estar preenchido.");
+		} catch (Exception e) {
+			assertEquals("Cenário 2: Tenta salvar com campo nome não preenchido.", "O nome é obrigatório", e.getMessage());
+		}
+		
+		// Cenário 3: Tenta salvar com campo número do documento não preenchido.
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setNumeroDocumento(null);
+		
+		EasyMock.reset(persistencia);
+		EasyMock.replay(persistencia);
+		
+		try {
+			entidadeActual = classeNegocio.salvar(entidadeEntrada);
+			
+			fail("Cenário 3: Tenta salvar com campo número do documento não preenchido. O campo número do documento não deve estar preenchido.");
+		} catch (Exception e) {
+			assertEquals("Cenário 3: Tenta salvar com campo número do documento não preenchido.", "O número do documento é obrigatório", e.getMessage());
+		}
+		
+		// Cenário 4: Tenta salvar com campo tipo do documento não preenchido.
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setTipoDocumento(null);
+		
+		EasyMock.reset(persistencia);
+		EasyMock.replay(persistencia);
+		
+		try {
+			entidadeActual = classeNegocio.salvar(entidadeEntrada);
+			
+			fail("Cenário 4: Tenta salvar com campo tipo do documento não preenchido. O campo tipo do documento não deve estar preenchido.");
+		} catch (Exception e) {
+			assertEquals("Cenário 4: Tenta salvar com campo tipo do documento não preenchido.", "O tipo do documento é obrigatório", e.getMessage());
+		}
+		
+		// Cenário 5: Tenta salvar com data inicial preenchida e data final não preenchida (período incompleto).
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setDataFinal(null);
+		
+		EasyMock.reset(persistencia);
+		EasyMock.replay(persistencia);
+		
+		try {
+			entidadeActual = classeNegocio.salvar(entidadeEntrada);
+			
+			fail("Cenário 5: Tenta salvar com data inicial preenchida e data final não preenchida (período incompleto). O campo data final não deve estar preenchido.");
+		} catch (Exception e) {
+			assertEquals("Cenário 5: Tenta salvar com data inicial preenchida e data final não preenchida (período incompleto).", "O período deve ser informado por completo", e.getMessage());
+		}
 	}
 	
 	/**
