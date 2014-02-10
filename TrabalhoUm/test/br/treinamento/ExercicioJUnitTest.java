@@ -337,6 +337,12 @@ public class ExercicioJUnitTest {
 			fail("Cenário 7.3: e-mail inválido (e-mail sem .). Erro retornado: " + e.getMessage());
 		}
 	}
+
+	@Test
+	public void testVerificarEntidadeValida() throws Exception {
+		testValidarCamposObrigatorios();
+		testValidarRegras();
+	}
 	
 //	@Test
 //	public void testCalcDigVerif() throws Exception {
