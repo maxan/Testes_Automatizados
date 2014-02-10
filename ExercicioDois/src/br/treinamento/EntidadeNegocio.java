@@ -6,7 +6,7 @@ public class EntidadeNegocio {
 	private EntidadeDAOInterface persistencia;
 	
 	public EntidadeNegocio() {
-		persistencia = new EntidadeDAO();
+		//persistencia = new EntidadeDAO();
 	}
 	
 	public void setPersistencia(EntidadeDAOInterface persistencia) {
