@@ -1,5 +1,6 @@
 package br.treinamento;
 
+
 import java.util.Date;
 
 public class ExercicioJUnit {
@@ -12,28 +13,28 @@ public class ExercicioJUnit {
 	
 	private void validarCamposObrigatorios(Entidade entidade) throws Exception{
 		if(entidade.getNome() == null)
-			throw new Exception("O nome é obrigatório");
+			throw new Exception("O nome √© obrigat√≥rio");
 		if(entidade.getNumeroDocumento() == null)
-			throw new Exception("O número do documento é obrigatório");
+			throw new Exception("O n√∫mero do documento √© obrigat√≥rio");
 		if(entidade.getTipoDocumento() == null)
-			throw new Exception("O tipo do documento é obrigatório");
+			throw new Exception("O tipo do documento √© obrigat√≥rio");
 		if((entidade.getDataInicial() != null) && (entidade.getDataFinal() == null))
-			throw new Exception("O período deve ser informado por completo");
+			throw new Exception("O per√≠odo deve ser informado por completo");
 	}
 	
 	private void validarRegras(Entidade entidade) throws Exception{
 		if(entidade.getNome().length() <= 5)
-			throw new Exception("O nome não pode ter menos que 5 caracteres");
+			throw new Exception("O nome n√£o pode ter menos que 5 caracteres");
 		if(entidade.getNome().length() >= 30)
-			throw new Exception("O nome não pode ter mais que 30 caracteres");
+			throw new Exception("O nome n√£o pode ter mais que 30 caracteres");
 		if(entidade.getDataInicial()!= null && entidade.getDataInicial().compareTo(new Date()) < 0)
-			throw new Exception("A data inicial não pode ser menor que a data atual");
+			throw new Exception("A data inicial n√£o pode ser menor que a data atual");
 		if(entidade.getDataInicial()!= null && entidade.getDataFinal().compareTo(entidade.getDataInicial()) < 0)
-			throw new Exception("A data final não pode ser menor que a data inicial");
+			throw new Exception("A data final n√£o pode ser menor que a data inicial");
 		if(entidade.getTipoDocumento() != 1 && entidade.getTipoDocumento() != 2)
-			throw new Exception("Tipo de documento inválido");
+			throw new Exception("Tipo de documento inv√°lido");
 		if(entidade.getEmail() != null && !(entidade.getEmail().contains("@") || entidade.getEmail().contains(".")))
-			throw new Exception("Endereço de email inválido");
+			throw new Exception("Endere√ßo de email inv√°lido");
 	}
 	
 	public boolean validaCPF(String CPF) {
