@@ -39,14 +39,6 @@ public class EntidadeNegocioTest {
 	public void tearDown() throws Exception {
 		EasyMock.reset(persistencia);
 	}
-
-//	@Test
-//	public void testSalvar() throws Exception {
-//		Entidade entidadeActual;
-//		Entidade entidadeExpected;
-//		Entidade entidadeEntrada;
-//		
-//	}
 	
 	@Test
 	public void testValidarCamposObrigatorios() throws Exception {
@@ -60,6 +52,7 @@ public class EntidadeNegocioTest {
 		entidadeExpected = getEntidadeValida();
 		entidadeExpected.setId((long) 1);
 		
+		EasyMock.reset(persistencia);
 		EasyMock.expect(persistencia.verificarUnicidadeNome(entidadeEntrada)).andReturn(true);
 		EasyMock.expect(persistencia.salvar(entidadeEntrada)).andReturn(entidadeExpected);
 		EasyMock.replay(persistencia);
@@ -85,6 +78,8 @@ public class EntidadeNegocioTest {
 			assertEquals("Cenário 2: Tenta salvar com campo nome não preenchido.", "O nome é obrigatório", e.getMessage());
 		}
 		
+		EasyMock.verify(persistencia);
+		
 		// Cenário 3: Tenta salvar com campo número do documento não preenchido.
 		entidadeEntrada = getEntidadeValida();
 		entidadeEntrada.setNumeroDocumento(null);
@@ -99,6 +94,8 @@ public class EntidadeNegocioTest {
 		} catch (Exception e) {
 			assertEquals("Cenário 3: Tenta salvar com campo número do documento não preenchido.", "O número do documento é obrigatório", e.getMessage());
 		}
+		
+		EasyMock.verify(persistencia);
 		
 		// Cenário 4: Tenta salvar com campo tipo do documento não preenchido.
 		entidadeEntrada = getEntidadeValida();
@@ -115,6 +112,8 @@ public class EntidadeNegocioTest {
 			assertEquals("Cenário 4: Tenta salvar com campo tipo do documento não preenchido.", "O tipo do documento é obrigatório", e.getMessage());
 		}
 		
+		EasyMock.verify(persistencia);
+		
 		// Cenário 5: Tenta salvar com data inicial preenchida e data final não preenchida (período incompleto).
 		entidadeEntrada = getEntidadeValida();
 		entidadeEntrada.setDataFinal(null);
@@ -129,6 +128,8 @@ public class EntidadeNegocioTest {
 		} catch (Exception e) {
 			assertEquals("Cenário 5: Tenta salvar com data inicial preenchida e data final não preenchida (período incompleto).", "O período deve ser informado por completo", e.getMessage());
 		}
+		
+		EasyMock.verify(persistencia);
 	}
 	
 	@Test
@@ -136,6 +137,7 @@ public class EntidadeNegocioTest {
 		Entidade entidadeActual;
 		Entidade entidadeExpected;
 		Entidade entidadeEntrada;
+		Calendar calendario;
 		
 		// Cenário 1: Salvamento com sucesso.
 		entidadeEntrada = getEntidadeValida();
@@ -143,6 +145,7 @@ public class EntidadeNegocioTest {
 		entidadeExpected = getEntidadeValida();
 		entidadeExpected.setId((long) 1);
 		
+		EasyMock.reset(persistencia);
 		EasyMock.expect(persistencia.verificarUnicidadeNome(entidadeEntrada)).andReturn(true);
 		EasyMock.expect(persistencia.salvar(entidadeEntrada)).andReturn(entidadeExpected);
 		EasyMock.replay(persistencia);
@@ -153,7 +156,7 @@ public class EntidadeNegocioTest {
 		
 		EasyMock.verify(persistencia);
 		
-		// Cenário 2: Tenta salvar com campo nome com nome contendo mais do que 30 caracteres.
+		// Cenário 2: Tenta salvar com campo nome com nome contendo mais do que 30 caracteres (erro).
 		entidadeEntrada = getEntidadeValida();
 		entidadeEntrada.setNome("Anderson Marinho da Silva e Silva");
 		
@@ -168,7 +171,9 @@ public class EntidadeNegocioTest {
 			assertEquals("Cenário 2: Tenta salvar com campo nome com nome contendo mais do que 30 caracteres.", "O nome não pode ter mais que 30 caracteres", e.getMessage());
 		}
 		
-		// Cenário 3: Tenta salvar com campo nome com nome contendo menos do que 5 caracteres.
+		EasyMock.verify(persistencia);
+		
+		// Cenário 3: Tenta salvar com campo nome com nome contendo menos do que 5 caracteres (erro).
 		entidadeEntrada = getEntidadeValida();
 		entidadeEntrada.setNome("Ana");
 		
@@ -182,6 +187,141 @@ public class EntidadeNegocioTest {
 		} catch (Exception e) {
 			assertEquals("Cenário 3: Tenta salvar com campo nome com nome contendo menos do que 5 caracteres.", "O nome não pode ter menos que 5 caracteres", e.getMessage());
 		}
+		
+		EasyMock.verify(persistencia);
+		
+		// Cenário 4: Tenta salvar com campo número do documento menor ou igual a zero (erro).
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setNumeroDocumento((long)-1);
+		
+		EasyMock.reset(persistencia);
+		EasyMock.replay(persistencia);
+		
+		try {
+			entidadeActual = classeNegocio.salvar(entidadeEntrada);
+			
+			fail("Cenário 4: Tenta salvar com campo número do documento menor ou igual a zero (erro). O campo número do documento deve ser menor ou igual a zero.");
+		} catch (Exception e) {
+			assertEquals("Cenário 4: Tenta salvar com campo número do documento menor ou igual a zero (erro).", "O número do documento deve ser maior que zero", e.getMessage());
+		}
+		
+		EasyMock.verify(persistencia);
+		
+		// Cenário 5: Tenta salvar com campo data inicial menor que a data atual (erro).
+		entidadeEntrada = getEntidadeValida();
+		calendario = Calendar.getInstance();
+		calendario.add(Calendar.DAY_OF_MONTH, -1);
+		entidadeEntrada.setDataInicial(calendario.getTime());
+		
+		EasyMock.reset(persistencia);
+		EasyMock.replay(persistencia);
+		
+		try {
+			entidadeActual = classeNegocio.salvar(entidadeEntrada);
+			
+			fail("Cenário 5: Tenta salvar com campo data inicial menor que a data atual (erro). O campo data inicial deve ser menor que a data atual.");
+		} catch (Exception e) {
+			assertEquals("Cenário 5: Tenta salvar com campo data inicial menor que a data atual (erro).", "A data inicial não pode ser menor que a data atual", e.getMessage());
+		}
+		
+		EasyMock.verify(persistencia);
+		
+		// Cenário 6: Tenta salvar com campo data final menor que a data inicial (erro).
+		entidadeEntrada = getEntidadeValida();
+		calendario = Calendar.getInstance();
+		calendario.add(Calendar.DAY_OF_MONTH, -1);
+		entidadeEntrada.setDataFinal(calendario.getTime());
+		
+		EasyMock.reset(persistencia);
+		EasyMock.replay(persistencia);
+		
+		try {
+			entidadeActual = classeNegocio.salvar(entidadeEntrada);
+			
+			fail("Cenário 6: Tenta salvar com campo data final menor que a data inicial (erro). O campo data final deve ser menor que a data inicial.");
+		} catch (Exception e) {
+			assertEquals("Cenário 6: Tenta salvar com campo data final menor que a data inicial (erro).", "A data final não pode ser menor que a data inicial", e.getMessage());
+		}
+		
+		EasyMock.verify(persistencia);
+		
+		// Cenário 7: Tenta salvar com campo tipo do documento inválido (erro).
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setTipoDocumento(4);
+		
+		EasyMock.reset(persistencia);
+		EasyMock.replay(persistencia);
+		
+		try {
+			entidadeActual = classeNegocio.salvar(entidadeEntrada);
+			
+			fail("Cenário 7: Tenta salvar com campo tipo do documento inválido (erro). O campo tipo do documento deve ser inválido.");
+		} catch (Exception e) {
+			assertEquals("Cenário 7: Tenta salvar com campo tipo do documento inválido (erro).", "Tipo de documento inválido", e.getMessage());
+		}
+		
+		EasyMock.verify(persistencia);
+		
+		// Cenário 8: Tenta salvar com campo e-mail inválido (erro).
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setEmail("meuemailcom");
+		
+		EasyMock.reset(persistencia);
+		EasyMock.replay(persistencia);
+		
+		try {
+			entidadeActual = classeNegocio.salvar(entidadeEntrada);
+			
+			fail("Cenário 8: Tenta salvar com campo e-mail inválido (erro). O campo e-mail deve ser inválido.");
+		} catch (Exception e) {
+			assertEquals("Cenário 8: Tenta salvar com campo e-mail inválido (erro).", "Endereço de email inválido", e.getMessage());
+		}
+		
+		EasyMock.verify(persistencia);
+	}
+	
+	@Test
+	public void testSalvar() throws Exception {
+		Entidade entidadeActual;
+		Entidade entidadeExpected;
+		Entidade entidadeEntrada;
+		
+		testValidarCamposObrigatorios();
+		testValidarRegras();
+		
+		// Cenário 1: Tenta salvar, mas unidicidade retorna false.
+		entidadeEntrada = getEntidadeValida();
+		
+		EasyMock.reset(persistencia);
+		EasyMock.expect(persistencia.verificarUnicidadeNome(entidadeEntrada)).andReturn(false);
+		EasyMock.replay(persistencia);
+		
+		try {
+			entidadeActual = classeNegocio.salvar(entidadeEntrada);
+			
+			fail("Cenário 1: Tenta salvar, mas unidicidade retorna false. Deveria retornar uma exceção.");
+		} catch(Exception e) {
+			assertEquals("Cenário 1: Tenta salvar, mas unidicidade retorna false.", "Já existe entidade cadastrada com este nome.", e.getMessage());
+		}
+		
+		EasyMock.verify(persistencia);
+		
+		// Cenário 2: Tenta salvar, salvamento ocorre com sucesso.
+		entidadeEntrada = getEntidadeValida();
+		
+		entidadeExpected = getEntidadeValida();
+		entidadeExpected.setId((long) 1);
+		
+		EasyMock.reset(persistencia);
+		EasyMock.expect(persistencia.verificarUnicidadeNome(entidadeEntrada)).andReturn(true);
+		EasyMock.expect(persistencia.salvar(entidadeEntrada)).andReturn(entidadeExpected);
+		EasyMock.replay(persistencia);
+		
+		entidadeActual = classeNegocio.salvar(entidadeEntrada);
+		
+		assertNotNull("Cenário 1: Salvamento com sucesso.", entidadeActual.getId());
+		
+		EasyMock.verify(persistencia);
 	}
 	
 	/**
