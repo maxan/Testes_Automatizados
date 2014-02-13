@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
 	<!-- Tabela Entidade -->
+	<!-- A primeira linha deve ser a mais completa! -->
 	<entidade id="1" nome="Nome da Entidade 1" data_inicial="2014-02-11" data_final="2015-02-01" email="meu@email.com" numero_documento="1234567"
-		tipo_documento="1" data_gravacao="2014-02-12"/> 
+		tipo_documento="1" data_gravacao="hoje"/> 
 	<entidade id="2" nome="Nome da Entidade 2" data_inicial="2014-02-12" data_final="2015-02-12" numero_documento="2345678"
-		tipo_documento="1" data_gravacao="2014-02-12"/> 
+		tipo_documento="1" data_gravacao="ontem"/> 
 	<entidade id="3" nome="Nome da Entidade 3" data_inicial="2014-02-12" data_final="2015-02-12" numero_documento="9875673"
-		tipo_documento="1" data_gravacao="2014-02-12"/> 
+		tipo_documento="1" data_gravacao="hoje"/> 
 </dataset>

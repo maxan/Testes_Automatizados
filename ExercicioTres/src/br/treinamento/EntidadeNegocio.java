@@ -15,30 +15,30 @@ public class EntidadeNegocio {
 
 	private void validarCamposObrigatorios(Entidade entidade) throws Exception{
 		if(entidade.getNome() == null)
-			throw new Exception("O nome é obrigatório");
+			throw new Exception("O nome Ã© obrigatÃ³rio");
 		if(entidade.getNumeroDocumento() == null)
-			throw new Exception("O número do documento é obrigatório");
+			throw new Exception("O nÃ©mero do documento Ã© obrigatÃ³rio");
 		if(entidade.getTipoDocumento() == null)
-			throw new Exception("O tipo do documento é obrigatório");
+			throw new Exception("O tipo do documento Ã© obrigatÃ³rio");
 		if((entidade.getDataInicial() != null) && (entidade.getDataFinal() == null))
-			throw new Exception("O período deve ser informado por completo");
+			throw new Exception("O perÃ©odo deve ser informado por completo");
 	}
 	
 	private void validarRegras(Entidade entidade) throws Exception{
 		if(entidade.getNome().length() < 5)
-			throw new Exception("O nome não pode ter menos que 5 caracteres");
+			throw new Exception("O nome nÃ£o pode ter menos que 5 caracteres");
 		if(entidade.getNome().length() > 30)
-			throw new Exception("O nome não pode ter mais que 30 caracteres");
+			throw new Exception("O nome nÃ£o pode ter mais que 30 caracteres");
 		if(entidade.getNumeroDocumento() <= 0)
-			throw new Exception("O número do documento deve ser maior que zero");
+			throw new Exception("O nÃºmero do documento deve ser maior que zero");
 		if(entidade.getDataInicial()!= null && entidade.getDataInicial().compareTo(new Date()) < 0)
-			throw new Exception("A data inicial não pode ser menor que a data atual");
+			throw new Exception("A data inicial nÃ£o pode ser menor que a data atual");
 		if(entidade.getDataInicial()!= null && entidade.getDataFinal().compareTo(entidade.getDataInicial()) < 0)
-			throw new Exception("A data final não pode ser menor que a data inicial");
+			throw new Exception("A data final nÃ£o pode ser menor que a data inicial");
 		if(entidade.getTipoDocumento() != 1 && entidade.getTipoDocumento() != 2)
-			throw new Exception("Tipo de documento inválido");
+			throw new Exception("Tipo de documento invÃ¡lido");
 		if(entidade.getEmail() != null && !(entidade.getEmail().contains("@") || entidade.getEmail().contains(".")))
-			throw new Exception("Endereço de email inválido");
+			throw new Exception("EndereÃ©o de email invÃ¡lido");
 	}
 
 	public Entidade salvar(Entidade entidade) throws Exception{
@@ -46,7 +46,7 @@ public class EntidadeNegocio {
 		validarRegras(entidade);
 		
 		if(!persistencia.verificarUnicidadeNome(entidade))
-			throw new Exception("Já existe entidade cadastrada com este nome.");
+			throw new Exception("JÃ¡ existe entidade cadastrada com este nome.");
 		
 		//Salvando...
 		entidade = persistencia.salvar(entidade);
@@ -61,7 +61,7 @@ public class EntidadeNegocio {
 		
 		Entidade entidadePersistida = getById(entidade.getId());
 		if(!entidade.getNome().equals(entidadePersistida.getNome()))
-			throw new Exception("Não é possível alterar o nome da entidade");
+			throw new Exception("NÃ£o Ã© possÃ­vel alterar o nome da entidade");
 		
 		//Alterando...
 		entidade = persistencia.alterar(entidade);
@@ -71,7 +71,7 @@ public class EntidadeNegocio {
 	
 	public void excluir(Entidade entidade) throws Exception{
 		if(entidade.getTipoDocumento() == 1)
-			throw new Exception("Não é possível excluir entidades com cpf");
+			throw new Exception("NÃ£o Ã© possÃ­vel excluir entidades com CPF");
 		
 		persistencia.excluir(entidade);
 	}
