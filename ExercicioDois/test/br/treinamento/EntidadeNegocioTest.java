@@ -131,6 +131,59 @@ public class EntidadeNegocioTest {
 		}
 	}
 	
+	@Test
+	public void testValidarRegras() throws Exception {
+		Entidade entidadeActual;
+		Entidade entidadeExpected;
+		Entidade entidadeEntrada;
+		
+		// Cenário 1: Salvamento com sucesso.
+		entidadeEntrada = getEntidadeValida();
+		
+		entidadeExpected = getEntidadeValida();
+		entidadeExpected.setId((long) 1);
+		
+		EasyMock.expect(persistencia.verificarUnicidadeNome(entidadeEntrada)).andReturn(true);
+		EasyMock.expect(persistencia.salvar(entidadeEntrada)).andReturn(entidadeExpected);
+		EasyMock.replay(persistencia);
+		
+		entidadeActual = classeNegocio.salvar(entidadeEntrada);
+		
+		assertNotNull("Cenário 1: Salvamento com sucesso.", entidadeActual.getId());
+		
+		EasyMock.verify(persistencia);
+		
+		// Cenário 2: Tenta salvar com campo nome com nome contendo mais do que 30 caracteres.
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setNome("Anderson Marinho da Silva e Silva");
+		
+		EasyMock.reset(persistencia);
+		EasyMock.replay(persistencia);
+		
+		try {
+			entidadeActual = classeNegocio.salvar(entidadeEntrada);
+			
+			fail("Cenário 2: Tenta salvar com campo nome com nome contendo mais do que 30 caracteres. O campo nome não deve ter mais que 30 caracteres.");
+		} catch (Exception e) {
+			assertEquals("Cenário 2: Tenta salvar com campo nome com nome contendo mais do que 30 caracteres.", "O nome não pode ter mais que 30 caracteres", e.getMessage());
+		}
+		
+		// Cenário 3: Tenta salvar com campo nome com nome contendo menos do que 5 caracteres.
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setNome("Ana");
+		
+		EasyMock.reset(persistencia);
+		EasyMock.replay(persistencia);
+		
+		try {
+			entidadeActual = classeNegocio.salvar(entidadeEntrada);
+			
+			fail("Cenário 3: Tenta salvar com campo nome com nome contendo menos do que 5 caracteres. O campo nome não deve ter menos que 5 caracteres.");
+		} catch (Exception e) {
+			assertEquals("Cenário 3: Tenta salvar com campo nome com nome contendo menos do que 5 caracteres.", "O nome não pode ter menos que 5 caracteres", e.getMessage());
+		}
+	}
+	
 	/**
 	 * Gera um objeto de Entidade válido e corretamente preenchido.
 	 * 
