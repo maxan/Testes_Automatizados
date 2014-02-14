@@ -324,6 +324,100 @@ public class EntidadeNegocioTest {
 		EasyMock.verify(persistencia);
 	}
 	
+	@Test
+	public void testGetById() throws Exception {
+		Entidade entidadeActual;
+		Entidade entidadeExpected;
+		
+		testValidarCamposObrigatorios();
+		testValidarRegras();
+		
+		// Cenário 1: Usuário retornado com suceso.
+		entidadeExpected = getEntidadeValida();
+		entidadeExpected.setId((long)10);
+		
+		EasyMock.reset(persistencia);
+		EasyMock.expect(persistencia.getById((long)10)).andReturn(entidadeExpected);
+		EasyMock.replay(persistencia);
+		
+		entidadeActual = classeNegocio.getById((long)10);
+		
+		assertEquals("Cenário 1: Usuário retornado com suceso. Usuário deveria ser encontrado.", entidadeExpected.getNome(), entidadeActual.getNome());
+		
+		EasyMock.verify(persistencia);
+		
+		// Cenário 2: Usuário não encontrado.
+		entidadeExpected = null;
+		
+		EasyMock.reset(persistencia);
+		EasyMock.expect(persistencia.getById((long)11)).andReturn(entidadeExpected);
+		EasyMock.replay(persistencia);
+		
+		entidadeActual = classeNegocio.getById((long)11);
+		
+		assertNull("Cenário 2: Usuário não encontrado. Usuário não deveria ser encontrado.", entidadeActual);
+		
+		EasyMock.verify(persistencia);
+	}
+	
+	@Test
+	public void testAlterar() throws Exception {
+		Entidade entidadeActual;
+		Entidade entidadeExpected;
+		Entidade entidadeEntrada;
+		Entidade entidadeExpectedGetById;
+		
+		testValidarCamposObrigatorios();
+		testValidarRegras();
+		testGetById();
+		
+		// Cenário 1: Usuário alterado com sucesso.
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setEmail("outro@email.com");
+		entidadeEntrada.setId((long)12);
+		
+		entidadeExpectedGetById = getEntidadeValida();
+		entidadeExpectedGetById.setId((long)12);
+		
+		entidadeExpected = getEntidadeValida();
+		entidadeExpected.setEmail("outro@email.com");
+		entidadeExpected.setId((long)12);
+		
+		EasyMock.reset(persistencia);
+		EasyMock.expect(persistencia.getById((long)12)).andReturn(entidadeExpectedGetById);
+		EasyMock.expect(persistencia.alterar(entidadeEntrada)).andReturn(entidadeExpected);
+		EasyMock.replay(persistencia);
+		
+		entidadeActual = classeNegocio.alterar(entidadeEntrada);
+		
+		assertNotNull("Cenário 1: Usuário alterado com sucesso. Usuário alterado está retornando sem ID.", entidadeActual.getId());
+		
+		EasyMock.verify(persistencia);
+		
+		// Cenário 2: Usuário com o nome alterado (erro).
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setEmail("outro@email.com");
+		entidadeEntrada.setNome("Anderson Silva da Silva");
+		entidadeEntrada.setId((long)12);
+		
+		entidadeExpectedGetById = getEntidadeValida();
+		entidadeExpectedGetById.setId((long)12);
+		
+		EasyMock.reset(persistencia);
+		EasyMock.expect(persistencia.getById((long)12)).andReturn(entidadeExpectedGetById);
+		EasyMock.replay(persistencia);
+		
+		try {
+			entidadeActual = classeNegocio.alterar(entidadeEntrada);
+			
+			fail("Cenário 2: Usuário com o nome alterado (erro). Deveria ter sido lançada uma exceção, pois o nome da entidade mudou.");
+		} catch (Exception e) {
+			assertSame("Cenário 2: Usuário com o nome alterado (erro).", "Não é possível alterar o nome da entidade", e.getMessage());
+		}
+		
+		EasyMock.verify(persistencia);
+	}
+	
 	/**
 	 * Gera um objeto de Entidade válido e corretamente preenchido.
 	 * 
