@@ -71,7 +71,7 @@ public class EntidadeNegocio {
 	
 	public void excluir(Entidade entidade) throws Exception{
 		if(entidade.getTipoDocumento() == 1)
-			throw new Exception("Não é possível excluir entidades com cpf");
+			throw new Exception("Não é possível excluir entidades com CPF");
 		
 		persistencia.excluir(entidade);
 	}

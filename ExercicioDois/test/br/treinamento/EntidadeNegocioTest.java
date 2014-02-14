@@ -418,6 +418,44 @@ public class EntidadeNegocioTest {
 		EasyMock.verify(persistencia);
 	}
 	
+	@Test
+	public void testExcluir() throws Exception {
+		Entidade entidadeActual;
+		Entidade entidadeExpected;
+		Entidade entidadeEntrada;
+		Entidade entidadeExpectedGetById;
+		
+		// Cenário 1: Exclui com sucesso.
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setTipoDocumento(2);
+		
+		EasyMock.reset(persistencia);
+		persistencia.excluir(entidadeEntrada);
+		EasyMock.expectLastCall().once();
+		EasyMock.replay(persistencia);
+		
+		classeNegocio.excluir(entidadeEntrada);
+		
+		EasyMock.verify(persistencia);
+		
+		// Cenário 2: Tenta excluir entidade com tipo de documento CPF (erro).
+		entidadeEntrada = getEntidadeValida();
+		
+		EasyMock.reset(persistencia);
+		EasyMock.replay(persistencia);
+		
+		try {
+			classeNegocio.excluir(entidadeEntrada);
+			
+			fail("Cenário 2: Tenta excluir entidade com tipo de documento CPF (erro). Deveria lançar uma exceção por estar tentando excluir uma entidade com tipo de documento CPF.");
+		} catch (Exception e) {
+			assertEquals("Cenário 2: Tenta excluir entidade com tipo de documento CPF (erro).", "Não é possível excluir entidades com CPF", e.getMessage());
+		}
+		
+		EasyMock.verify(persistencia);
+		
+	}
+	
 	/**
 	 * Gera um objeto de Entidade válido e corretamente preenchido.
 	 * 
