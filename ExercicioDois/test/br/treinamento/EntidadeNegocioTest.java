@@ -453,7 +453,23 @@ public class EntidadeNegocioTest {
 		}
 		
 		EasyMock.verify(persistencia);
+	}
+	
+	@Test
+	public void testGetQuantidadeRegistros() throws Exception {
+		int quantidadeRegistrosActual;
+		int quantidadeRegistrosExpected = 10;
 		
+		// Cenário único: Retorna a quantidade de registos.
+		EasyMock.reset(persistencia);
+		EasyMock.expect(persistencia.getQuantidadeRegistros()).andReturn(quantidadeRegistrosExpected);
+		EasyMock.replay(persistencia);
+		
+		quantidadeRegistrosActual = classeNegocio.getQuantidadeRegistros();
+		
+		assertEquals("Cenário único: Retorna a quantidade de registos.", quantidadeRegistrosExpected, quantidadeRegistrosActual);
+		
+		EasyMock.verify(persistencia);
 	}
 	
 	/**
