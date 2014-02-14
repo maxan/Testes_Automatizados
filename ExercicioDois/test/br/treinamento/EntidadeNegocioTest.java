@@ -472,6 +472,34 @@ public class EntidadeNegocioTest {
 		EasyMock.verify(persistencia);
 	}
 	
+	@Test
+	public void testVerificarUnicidadeNome() throws Exception {
+		Entidade entidadeEntrada;
+		boolean respostaActual;
+		
+		// Cenário 1: Entidade é única.
+		entidadeEntrada = getEntidadeValida();
+		
+		EasyMock.reset(persistencia);
+		EasyMock.expect(persistencia.verificarUnicidadeNome(entidadeEntrada)).andReturn(true);
+		EasyMock.replay(persistencia);
+		
+		respostaActual = classeNegocio.verificarUnicidadeNome(entidadeEntrada);
+		
+		assertTrue("Cenário 1: Entidade é única.", respostaActual);
+		
+		// Cenário 2: Entidade não é única.
+		entidadeEntrada = getEntidadeValida();
+		
+		EasyMock.reset(persistencia);
+		EasyMock.expect(persistencia.verificarUnicidadeNome(entidadeEntrada)).andReturn(false);
+		EasyMock.replay(persistencia);
+		
+		respostaActual = classeNegocio.verificarUnicidadeNome(entidadeEntrada);
+		
+		assertFalse("Cenário 2: Entidade não é única.", respostaActual);
+	}
+	
 	/**
 	 * Gera um objeto de Entidade válido e corretamente preenchido.
 	 * 
