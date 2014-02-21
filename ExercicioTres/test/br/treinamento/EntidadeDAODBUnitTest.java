@@ -12,7 +12,11 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ReplacementDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.ext.hsqldb.HsqldbDataTypeFactory;
+import org.dbunit.operation.DatabaseOperation;
 import org.dbunit.util.fileloader.FlatXmlDataFileLoader;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class EntidadeDAODBUnitTest extends DatabaseTestCase {
@@ -41,6 +45,25 @@ public class EntidadeDAODBUnitTest extends DatabaseTestCase {
 		replacement.addReplacementObject("ontem", calendario.getTime());
 		
 		return replacement;
+	}
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		System.out.println("INICIANDO o teste da classe de negócio.");
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		System.out.println("CONCLUÍDO teste da classe de negócio.");
+	}
+	
+	@Before
+	public void setUp() throws Exception {
+		persistencia = new EntidadeDAO();
+		
+		// A linha abaixo garante que vou conhecer o estado do banco após cada testes, já
+		// que executa um DELETE_ALL depois de cada teste realizado.
+		DatabaseOperation.CLEAN_INSERT.execute(getConnection(), getDataSet());
 	}
 	
 	public void testVerificarUnicidadeNome() throws Exception {
