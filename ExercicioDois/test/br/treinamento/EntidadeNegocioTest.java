@@ -500,6 +500,106 @@ public class EntidadeNegocioTest {
 		assertFalse("Cenário 2: Entidade não é única.", respostaActual);
 	}
 	
+	@Test
+	public void testGeral() throws Exception {
+		// Cenário 1: Verifica a quantidade de registros.
+		int quantidadeRegistrosActual;
+		int quantidadeRegistrosExpected = 1;
+		
+		EasyMock.reset(persistencia);
+		EasyMock.expect(persistencia.getQuantidadeRegistros()).andReturn(quantidadeRegistrosExpected);
+		EasyMock.replay(persistencia);
+		
+		quantidadeRegistrosActual = classeNegocio.getQuantidadeRegistros();
+		
+		assertEquals("Cenário 1: Verifica a quantidade de registros.", quantidadeRegistrosExpected, quantidadeRegistrosActual);
+		
+		//EasyMock.verify(persistencia);
+		
+		// Cenário 2: Insere um novo registro.
+		Entidade entidadeActual;
+		Entidade entidadeExpected;
+		Entidade entidadeEntrada;
+		Calendar dataCalendario = Calendar.getInstance();
+		
+		testValidarCamposObrigatorios();
+		testValidarRegras();
+		
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setTipoDocumento(2);
+		
+		entidadeExpected = getEntidadeValida();
+		entidadeExpected.setId((long) 2);
+		entidadeExpected.setDataGravacao(dataCalendario.getTime());
+		
+		EasyMock.reset(persistencia);
+		EasyMock.expect(persistencia.verificarUnicidadeNome(entidadeEntrada)).andReturn(true);
+		EasyMock.expect(persistencia.salvar(entidadeEntrada)).andReturn(entidadeExpected);
+		EasyMock.replay(persistencia);
+		
+		entidadeActual = classeNegocio.salvar(entidadeEntrada);
+		
+		assertNotNull("Cenário 2: Insere um novo registro.", entidadeActual.getId());
+		
+		//EasyMock.verify(persistencia);
+		
+		// Cenário 3: Verifica que a quantidade de registros foi incrementada.
+		quantidadeRegistrosActual = 0;
+		quantidadeRegistrosExpected = 2;
+		
+		EasyMock.reset(persistencia);
+		EasyMock.expect(persistencia.getQuantidadeRegistros()).andReturn(quantidadeRegistrosExpected);
+		EasyMock.replay(persistencia);
+		
+		quantidadeRegistrosActual = classeNegocio.getQuantidadeRegistros();
+		
+		assertEquals("Cenário 3: Verifica que a quantidade de registros foi incrementada.", quantidadeRegistrosExpected, quantidadeRegistrosActual);
+		
+		//EasyMock.verify(persistencia);
+		
+		// Cenário 4: Tenta inserir o mesmo registro mas recebe uma exceção.
+		entidadeEntrada = getEntidadeValida();
+		
+		EasyMock.reset(persistencia);
+		EasyMock.expect(persistencia.verificarUnicidadeNome(entidadeEntrada)).andReturn(false);
+		EasyMock.replay(persistencia);
+		
+		try {
+			entidadeActual = classeNegocio.salvar(entidadeEntrada);
+			
+			fail("Cenário 4: Tenta inserir o mesmo registro mas recebe uma exceção. Deveria retornar uma exceção.");
+		} catch(Exception e) {
+			assertEquals("Cenário 4: Tenta inserir o mesmo registro mas recebe uma exceção.", "Já existe entidade cadastrada com este nome.", e.getMessage());
+		}
+		
+		//EasyMock.verify(persistencia);
+		
+		// Cenário 5: Exclui o registro.
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setTipoDocumento(2);
+		
+		EasyMock.reset(persistencia);
+		persistencia.excluir(entidadeEntrada);
+		EasyMock.expectLastCall().once();
+		EasyMock.replay(persistencia);
+		
+		classeNegocio.excluir(entidadeEntrada);
+		
+		EasyMock.verify(persistencia);
+		
+		// Cenário 6: Verifica a quantidade de registros decrementada.
+		quantidadeRegistrosActual = 0;
+		quantidadeRegistrosExpected = 1;
+		
+		EasyMock.reset(persistencia);
+		EasyMock.expect(persistencia.getQuantidadeRegistros()).andReturn(quantidadeRegistrosExpected);
+		EasyMock.replay(persistencia);
+		
+		quantidadeRegistrosActual = classeNegocio.getQuantidadeRegistros();
+		
+		assertEquals("Cenário 6: Verifica a quantidade de registros decrementada.", quantidadeRegistrosExpected, quantidadeRegistrosActual);
+	}
+	
 	/**
 	 * Gera um objeto de Entidade válido e corretamente preenchido.
 	 * 
