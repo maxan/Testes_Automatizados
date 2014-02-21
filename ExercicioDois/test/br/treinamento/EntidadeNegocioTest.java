@@ -585,7 +585,7 @@ public class EntidadeNegocioTest {
 		
 		classeNegocio.excluir(entidadeEntrada);
 		
-		EasyMock.verify(persistencia);
+		//EasyMock.verify(persistencia);
 		
 		// Cenário 6: Verifica a quantidade de registros decrementada.
 		quantidadeRegistrosActual = 0;
@@ -598,6 +598,8 @@ public class EntidadeNegocioTest {
 		quantidadeRegistrosActual = classeNegocio.getQuantidadeRegistros();
 		
 		assertEquals("Cenário 6: Verifica a quantidade de registros decrementada.", quantidadeRegistrosExpected, quantidadeRegistrosActual);
+		
+		EasyMock.verify(persistencia);
 	}
 	
 	/**
