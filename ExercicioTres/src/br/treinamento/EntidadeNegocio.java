@@ -38,7 +38,7 @@ public class EntidadeNegocio {
 		if(entidade.getTipoDocumento() != 1 && entidade.getTipoDocumento() != 2)
 			throw new Exception("Tipo de documento inválido");
 		if(entidade.getEmail() != null && !(entidade.getEmail().contains("@") || entidade.getEmail().contains(".")))
-			throw new Exception("Endereéo de email inválido");
+			throw new Exception("Endereço de email inválido");
 	}
 
 	public Entidade salvar(Entidade entidade) throws Exception{

@@ -222,6 +222,112 @@ public class EntidadeDAODBUnitTest extends DatabaseTestCase {
 		}
 	}
 	
+	public void testValidarRegras() throws Exception {
+		Entidade entidadeEntrada;
+		Entidade entidadeActual;
+		Entidade entidadeExpected;
+		Calendar calendario = Calendar.getInstance();
+		
+		// Cenário 1: todos os campos válidos.
+		entidadeEntrada = classeNegocio.getById(new Long(5));
+		entidadeEntrada.setEmail("meunovo@email.com");
+		entidadeEntrada.setNumeroDocumento(81888833017L);
+		
+		entidadeActual = classeNegocio.alterar(entidadeEntrada);
+		
+		entidadeExpected = classeNegocio.getById(new Long(5));
+		
+		assertTrue("Cenário 1: todos os campos válidos.", entidadeExpected.equals(entidadeActual));
+		
+		// Cenário 2: tenta alterar o campo nome com um nome contendo mais do que 30 caracteres (erro).
+		entidadeEntrada = classeNegocio.getById(new Long(6));
+		entidadeEntrada.setNome("Camila Alves da Silva Marinho e Silva");
+		
+		try {
+			entidadeActual = classeNegocio.alterar(entidadeEntrada);
+			
+			fail("Cenário 2: tenta alterar o campo nome com um nome contendo mais do que 30 caracteres (erro). O campo nome não deve ter mais que 30 caracteres.");
+		} catch (Exception e) {
+			assertEquals("Cenário 2: tenta alterar o campo nome com um nome contendo mais do que 30 caracteres (erro).", "O nome não pode ter mais que 30 caracteres", e.getMessage());
+		}
+		
+		// Cenário 3: tenta alterar o campo nome com um nome contendo menos do que 5 caracteres (erro).
+		entidadeEntrada = classeNegocio.getById(new Long(6));
+		entidadeEntrada.setNome("Ana");
+		
+		try {
+			entidadeActual = classeNegocio.alterar(entidadeEntrada);
+			
+			fail("Cenário 3: tenta alterar o campo nome com um nome contendo menos do que 5 caracteres (erro). O campo nome não deve ter menos que 5 caracteres.");
+		} catch (Exception e) {
+			assertEquals("Cenário 3: tenta alterar o campo nome com um nome contendo menos do que 5 caracteres (erro).", "O nome não pode ter menos que 5 caracteres", e.getMessage());
+		}
+		
+		// Cenário 4: tenta alterar com campo número do documento menor ou igual a zero (erro).
+		entidadeEntrada = classeNegocio.getById(new Long(6));
+		entidadeEntrada.setNumeroDocumento(0L);
+		
+		try {
+			entidadeActual = classeNegocio.alterar(entidadeEntrada);
+			
+			fail("Cenário 4: tenta alterar com campo número do documento menor ou igual a zero (erro). O campo número do documento deve ser menor ou igual a zero.");
+		} catch (Exception e) {
+			assertEquals("Cenário 4: tenta alterar com campo número do documento menor ou igual a zero (erro).", "O número do documento deve ser maior que zero", e.getMessage());
+		}
+		
+		// Cenário 5: tenta alterar com campo data inicial menor que a data atual (erro).
+		entidadeEntrada = classeNegocio.getById(new Long(6));
+		calendario = Calendar.getInstance();
+		calendario.add(Calendar.DAY_OF_MONTH, -1);
+		entidadeEntrada.setDataInicial(calendario.getTime());
+		
+		try {
+			entidadeActual = classeNegocio.alterar(entidadeEntrada);
+			
+			fail("Cenário 5: tenta alterar com campo data inicial menor que a data atual (erro). O campo data inicial deve ser menor que a data atual.");
+		} catch (Exception e) {
+			assertEquals("Cenário 5: tenta alterar com campo data inicial menor que a data atual (erro).", "A data inicial não pode ser menor que a data atual", e.getMessage());
+		}
+		
+		// Cenário 6: tenta alterar com campo data final menor que a data inicial (erro).
+		entidadeEntrada = classeNegocio.getById(new Long(6));
+		calendario = Calendar.getInstance();
+		calendario.add(Calendar.DAY_OF_MONTH, -1);
+		entidadeEntrada.setDataFinal(calendario.getTime());
+		
+		try {
+			entidadeActual = classeNegocio.alterar(entidadeEntrada);
+			
+			fail("Cenário 6: tenta alterar com campo data final menor que a data inicial (erro). O campo data final deve ser menor que a data inicial.");
+		} catch (Exception e) {
+			assertEquals("Cenário 6: tenta alterar com campo data final menor que a data inicial (erro).", "A data final não pode ser menor que a data inicial", e.getMessage());
+		}
+		
+		// Cenário 7: tenta alterar com campo tipo do documento inválido (erro).
+		entidadeEntrada = classeNegocio.getById(new Long(6));
+		entidadeEntrada.setTipoDocumento(4);
+		
+		try {
+			entidadeActual = classeNegocio.alterar(entidadeEntrada);
+			
+			fail("Cenário 7: tenta alterar com campo tipo do documento inválido (erro). O campo tipo do documento deve ser inválido.");
+		} catch (Exception e) {
+			assertEquals("Cenário 7: tenta alterar com campo tipo do documento inválido (erro).", "Tipo de documento inválido", e.getMessage());
+		}
+		
+		// Cenário 8: tenta salvar com campo e-mail inválido (erro).
+		entidadeEntrada = classeNegocio.getById(new Long(6));
+		entidadeEntrada.setEmail("meuemailcom");
+		
+		try {
+			entidadeActual = classeNegocio.alterar(entidadeEntrada);
+			
+			fail("Cenário 8: tenta salvar com campo e-mail inválido (erro). O campo e-mail deve ser inválido.");
+		} catch (Exception e) {
+			assertEquals("Cenário 8: tenta salvar com campo e-mail inválido (erro).", "Endereço de email inválido", e.getMessage());
+		}
+	}
+	
 	/**
 	 * Gera um objeto de Entidade válido e corretamente preenchido.
 	 * 
