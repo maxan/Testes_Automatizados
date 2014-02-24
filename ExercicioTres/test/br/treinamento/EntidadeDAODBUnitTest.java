@@ -90,6 +90,17 @@ public class EntidadeDAODBUnitTest extends DatabaseTestCase {
 		assertFalse("Cenário 2: não existe a pessoa cadastrada.", respostaActual);
 	}
 	
+	public void testGetQuantidadeRegistros() throws Exception {
+		int quantidadeRetrieveAll;
+		int quantidadeGetQuantidade;
+		
+		// Cenário único: retorna a quantidade de registos.
+		quantidadeGetQuantidade = classeNegocio.getQuantidadeRegistros();
+		quantidadeRetrieveAll = persistencia.retrieveAll().size();
+		
+		assertEquals(quantidadeRetrieveAll, quantidadeGetQuantidade);
+	}
+	
 	/**
 	 * Gera um objeto de Entidade válido e corretamente preenchido.
 	 * 
