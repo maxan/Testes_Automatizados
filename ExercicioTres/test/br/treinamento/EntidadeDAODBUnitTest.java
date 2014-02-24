@@ -157,6 +157,71 @@ public class EntidadeDAODBUnitTest extends DatabaseTestCase {
 		}
 	}
 	
+	public void testValidarCamposObrigatorios() throws Exception {
+		Entidade entidadeEntrada;
+		Entidade entidadeActual;
+		Entidade entidadeExpected;
+		
+		// Cenário 1: todos os campos válidos.
+		entidadeEntrada = classeNegocio.getById(new Long(5));
+		entidadeEntrada.setEmail("meunovo@email.com");
+		entidadeEntrada.setNumeroDocumento(81888833017L);
+		
+		entidadeActual = classeNegocio.alterar(entidadeEntrada);
+		
+		entidadeExpected = classeNegocio.getById(new Long(5));
+		
+		assertTrue("Cenário 1: todos os campos válidos.", entidadeExpected.equals(entidadeActual));
+		
+		// Cenário 2: nome não preenchido.
+		entidadeEntrada = classeNegocio.getById(new Long(6));
+		entidadeEntrada.setNome(null);
+		
+		try {
+			entidadeActual = classeNegocio.alterar(entidadeEntrada);
+			
+			fail("Cenário 2: nome não preenchido. O campo nome não deve estar preenchido (nulo).");
+		} catch (Exception e) {
+			assertEquals("Cenário 2: nome não preenchido.", "O nome é obrigatório", e.getMessage());
+		}
+		
+		// Cenário 3: número do documento não preenchido.
+		entidadeEntrada = classeNegocio.getById(new Long(6));
+		entidadeEntrada.setNumeroDocumento(null);
+		
+		try {
+			entidadeActual = classeNegocio.alterar(entidadeEntrada);
+			
+			fail("Cenário 3: número do documento não preenchido. O campo número do documento não deve estar preenchido (nulo).");
+		} catch (Exception e) {
+			assertEquals("Cenário 3: número do documento não preenchido.", "O número do documento é obrigatório", e.getMessage());
+		}
+		
+		// Cenário 4: tipo do documento não preenchido.
+		entidadeEntrada = classeNegocio.getById(new Long(6));
+		entidadeEntrada.setTipoDocumento(null);
+		
+		try {
+			entidadeActual = classeNegocio.alterar(entidadeEntrada);
+			
+			fail("Cenário 4: tipo do documento não preenchido. O campo tipo do documento não deve estar preenchido (nulo).");
+		} catch (Exception e) {
+			assertEquals("Cenário 4: tipo do documento não preenchido.", "O tipo do documento é obrigatório", e.getMessage());
+		}
+		
+		// Cenário 5: período não informado por completo.
+		entidadeEntrada = classeNegocio.getById(new Long(6));
+		entidadeEntrada.setDataFinal(null);
+		
+		try {
+			entidadeActual = classeNegocio.alterar(entidadeEntrada);
+			
+			fail("Cenário 5: período não informado por completo. O campo data final não deve estar preenchido (nulo).");
+		} catch (Exception e) {
+			assertEquals("Cenário 5: período não informado por completo.", "O período deve ser informado por completo", e.getMessage());
+		}
+	}
+	
 	/**
 	 * Gera um objeto de Entidade válido e corretamente preenchido.
 	 * 

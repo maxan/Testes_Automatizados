@@ -12,4 +12,6 @@
 		tipo_documento="1" data_gravacao="hoje"/>
 	<entidade id="5" nome="Anderson Marinho" data_inicial="2014-05-01" data_final="2015-05-31" numero_documento="01123435456"
 		tipo_documento="1" data_gravacao="2014-02-28"/>
+	<entidade id="6" nome="Camila Alves" data_inicial="2014-05-01" data_final="2015-05-31" numero_documento="33328854720"
+		tipo_documento="1" data_gravacao="2014-02-28"/>
 </dataset>

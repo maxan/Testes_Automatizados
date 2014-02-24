@@ -17,11 +17,11 @@ public class EntidadeNegocio {
 		if(entidade.getNome() == null)
 			throw new Exception("O nome é obrigatório");
 		if(entidade.getNumeroDocumento() == null)
-			throw new Exception("O némero do documento é obrigatório");
+			throw new Exception("O número do documento é obrigatório");
 		if(entidade.getTipoDocumento() == null)
 			throw new Exception("O tipo do documento é obrigatório");
 		if((entidade.getDataInicial() != null) && (entidade.getDataFinal() == null))
-			throw new Exception("O peréodo deve ser informado por completo");
+			throw new Exception("O período deve ser informado por completo");
 	}
 	
 	private void validarRegras(Entidade entidade) throws Exception{
