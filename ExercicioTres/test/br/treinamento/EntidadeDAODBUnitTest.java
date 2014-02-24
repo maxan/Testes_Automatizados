@@ -20,8 +20,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class EntidadeDAODBUnitTest extends DatabaseTestCase {
+	private EntidadeNegocio classeNegocio;
 	private EntidadeDAOInterface persistencia;
-	private  final static String TABELA_ENTIDADE = "entidade";
+	private final static String TABELA_ENTIDADE = "entidade";
 
 	@Override
 	protected IDatabaseConnection getConnection() throws Exception {
@@ -60,6 +61,8 @@ public class EntidadeDAODBUnitTest extends DatabaseTestCase {
 	@Before
 	public void setUp() throws Exception {
 		persistencia = new EntidadeDAO();
+		classeNegocio = new EntidadeNegocio();
+		classeNegocio.setPersistencia(persistencia);
 		
 		// A linha abaixo garante que vou conhecer o estado do banco após cada testes, já
 		// que executa um DELETE_ALL depois de cada teste realizado.
@@ -67,6 +70,43 @@ public class EntidadeDAODBUnitTest extends DatabaseTestCase {
 	}
 	
 	public void testVerificarUnicidadeNome() throws Exception {
-		//
+		Entidade entidadeEntrada;
+		boolean respostaActual;
+		
+		// Cenário 1: já existe a pessoa cadastrada.
+		entidadeEntrada = getEntidadeValida();
+		
+		respostaActual = classeNegocio.verificarUnicidadeNome(entidadeEntrada);
+		
+		assertTrue("Cenário 1: já existe a pessoa cadastrada.", respostaActual);
+		
+		// Cenário 2: não existe a pessoa cadastrada.
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setNome("Alessandra da Silva");
+		entidadeEntrada.setNumeroDocumento(88666113529L);
+		
+		respostaActual = classeNegocio.verificarUnicidadeNome(entidadeEntrada);
+		
+		assertFalse("Cenário 2: não existe a pessoa cadastrada.", respostaActual);
+	}
+	
+	/**
+	 * Gera um objeto de Entidade válido e corretamente preenchido.
+	 * 
+	 * @return Entidade
+	 */
+	private Entidade getEntidadeValida() {
+		Calendar dataCalendario = Calendar.getInstance();
+		
+		Entidade entidade = new Entidade();
+		entidade.setNome("Anderson Silva");
+		dataCalendario.set(2014, 5, 1);
+		entidade.setDataInicial(new Date(dataCalendario.getTimeInMillis()));
+		dataCalendario.set(2014, 5, 31);
+		entidade.setDataFinal(new Date(dataCalendario.getTimeInMillis()));
+		entidade.setTipoDocumento(1);
+		entidade.setNumeroDocumento(new Long(01123435456));
+		
+		return entidade;
 	}
 }
