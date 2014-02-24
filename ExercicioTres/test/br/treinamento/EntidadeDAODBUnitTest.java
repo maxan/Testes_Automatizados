@@ -13,8 +13,11 @@ import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.ReplacementDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.dataset.xml.FlatXmlProducer;
 import org.dbunit.ext.hsqldb.HsqldbDataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
 import org.dbunit.util.fileloader.FlatXmlDataFileLoader;
@@ -22,6 +25,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.xml.sax.InputSource;
 
 public class EntidadeDAODBUnitTest extends DatabaseTestCase {
 	private EntidadeNegocio classeNegocio;
@@ -87,7 +91,6 @@ public class EntidadeDAODBUnitTest extends DatabaseTestCase {
 		// Cenário 2: não existe a pessoa cadastrada.
 		entidadeEntrada = getEntidadeValida();
 		entidadeEntrada.setNome("Alessandra da Silva");
-		entidadeEntrada.setNumeroDocumento(88666113529L);
 		
 		respostaActual = classeNegocio.verificarUnicidadeNome(entidadeEntrada);
 		
@@ -331,10 +334,10 @@ public class EntidadeDAODBUnitTest extends DatabaseTestCase {
 	public void testAlterar() throws Exception {
 		testValidarCamposObrigatorios();
 		testValidarRegras();
+		
 		Entidade entidadeEntrada;
 		Entidade entidadeActual;
 		Entidade entidadeExpected;
-		Calendar calendario = Calendar.getInstance();
 		
 		// Cenário 1: alteração realizada com sucesso.
 		entidadeEntrada = classeNegocio.getById(new Long(5));
@@ -357,6 +360,39 @@ public class EntidadeDAODBUnitTest extends DatabaseTestCase {
 			fail("Cenário 2: tenta alterar com um nome diferente. Deveria ter sido lançada uma exceção, pois o nome da entidade mudou.");
 		} catch (Exception e) {
 			assertEquals("Cenário 2: tenta alterar com um nome diferente.", "Não é possível alterar o nome da entidade", e.getMessage());
+		}
+	}
+	
+	public void testSalvar() throws Exception {
+		testValidarCamposObrigatorios();
+		testValidarRegras();
+		
+		Entidade entidadeActual;
+		Entidade entidadeExpected;
+		Entidade entidadeEntrada;
+		
+		// Cenário 1: salva novo registro com sucesso.
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setNome("Armando Paiva");
+		entidadeEntrada.setNumeroDocumento(44792377552L);
+		
+		IDataSet dadosEsperados = new FlatXmlDataSet(new FlatXmlProducer(new InputSource("massa_dados_salvar.xml")));
+		ITable tabelaEsperada = dadosEsperados.getTable(TABELA_ENTIDADE);
+		
+		entidadeActual = classeNegocio.salvar(entidadeEntrada);
+		
+		assertNotNull("Cenário 1: salva novo registro com sucesso. Teste do ID retornado.", entidadeActual.getId());
+		assertEquals("Cenário 1: salva novo registro com sucesso. Teste das quantidades.", tabelaEsperada.getRowCount(), classeNegocio.getQuantidadeRegistros());
+		
+		// Cenário 2: tenta salvar novo registro com o mesmo nome de outro já presente no banco de dados.
+		entidadeEntrada = getEntidadeValida();
+		
+		try {
+			entidadeActual = classeNegocio.salvar(entidadeEntrada);
+			
+			fail("Cenário 2: tenta salvar novo registro com o mesmo nome de outro já presente no banco de dados. Deveria retornar uma exceção.");
+		} catch (Exception e) {
+			assertEquals("Cenário 2: tenta salvar novo registro com o mesmo nome de outro já presente no banco de dados.", "Já existe entidade cadastrada com este nome.", e.getMessage());
 		}
 	}
 	

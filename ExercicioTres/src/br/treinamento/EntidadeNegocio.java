@@ -45,7 +45,9 @@ public class EntidadeNegocio {
 		validarCamposObrigatorios(entidade);
 		validarRegras(entidade);
 		
-		if(!persistencia.verificarUnicidadeNome(entidade))
+		// TODO: Verificar com o professor a lógica dessa verificação.
+		//if(!persistencia.verificarUnicidadeNome(entidade))
+		if(persistencia.verificarUnicidadeNome(entidade))
 			throw new Exception("Já existe entidade cadastrada com este nome.");
 		
 		//Salvando...
