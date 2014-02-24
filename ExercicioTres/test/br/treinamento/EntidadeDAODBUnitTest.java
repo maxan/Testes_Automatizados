@@ -328,6 +328,38 @@ public class EntidadeDAODBUnitTest extends DatabaseTestCase {
 		}
 	}
 	
+	public void testAlterar() throws Exception {
+		testValidarCamposObrigatorios();
+		testValidarRegras();
+		Entidade entidadeEntrada;
+		Entidade entidadeActual;
+		Entidade entidadeExpected;
+		Calendar calendario = Calendar.getInstance();
+		
+		// Cenário 1: alteração realizada com sucesso.
+		entidadeEntrada = classeNegocio.getById(new Long(5));
+		entidadeEntrada.setEmail("meunovo@email.com");
+		entidadeEntrada.setNumeroDocumento(81888833017L);
+		
+		entidadeActual = classeNegocio.alterar(entidadeEntrada);
+		
+		entidadeExpected = classeNegocio.getById(new Long(5));
+		
+		assertTrue("Cenário 1: alteração realizada com sucesso.", entidadeExpected.equals(entidadeActual));
+		
+		// Cenário 2: tenta alterar com um nome diferente.
+		entidadeEntrada = classeNegocio.getById(new Long(6));
+		entidadeEntrada.setNome("Camila Silva");
+		
+		try {
+			entidadeActual = classeNegocio.alterar(entidadeEntrada);
+			
+			fail("Cenário 2: tenta alterar com um nome diferente. Deveria ter sido lançada uma exceção, pois o nome da entidade mudou.");
+		} catch (Exception e) {
+			assertEquals("Cenário 2: tenta alterar com um nome diferente.", "Não é possível alterar o nome da entidade", e.getMessage());
+		}
+	}
+	
 	/**
 	 * Gera um objeto de Entidade válido e corretamente preenchido.
 	 * 
