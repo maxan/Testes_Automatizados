@@ -1,5 +1,8 @@
 package br.treinamento;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.io.FileInputStream;
 import java.util.Calendar;
 import java.util.Date;
@@ -99,6 +102,36 @@ public class EntidadeDAODBUnitTest extends DatabaseTestCase {
 		quantidadeRetrieveAll = persistencia.retrieveAll().size();
 		
 		assertEquals(quantidadeRetrieveAll, quantidadeGetQuantidade);
+	}
+	
+	public void testExcluir() throws Exception {
+		Entidade entidadeEntrada;
+		int quantidadeRegistrosExpected;
+		int quantidadeRegistrosActual;
+		
+		// Cenário 1: exclusão realizada com sucesso.
+		entidadeEntrada = getEntidadeValida();
+		entidadeEntrada.setTipoDocumento(2);
+		entidadeEntrada.setId(new Long(4));
+		
+		quantidadeRegistrosExpected = classeNegocio.getQuantidadeRegistros() - 1;
+		
+		classeNegocio.excluir(entidadeEntrada);
+		
+		quantidadeRegistrosActual = classeNegocio.getQuantidadeRegistros();
+		
+		assertEquals("Cenário 1: exclusão realizada com sucesso.", quantidadeRegistrosExpected, quantidadeRegistrosActual);
+		
+		// Cenário 2: tenta excluir entidade com tipo de documento CPF (erro).
+		entidadeEntrada = classeNegocio.getById(new Long(1));
+		
+		try {
+			classeNegocio.excluir(entidadeEntrada);
+			
+			fail("Cenário 2: tenta excluir entidade com tipo de documento CPF (erro). Deveria lançar uma exceção por estar tentando excluir uma entidade com tipo de documento CPF.");
+		} catch (Exception e) {
+			assertEquals("Cenário 2: tenta excluir entidade com tipo de documento CPF (erro).", "Não é possível excluir entidades com CPF", e.getMessage());
+		}
 	}
 	
 	/**
