@@ -1,6 +1,7 @@
 package br.treinamento;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.io.FileInputStream;
@@ -104,6 +105,28 @@ public class EntidadeDAODBUnitTest extends DatabaseTestCase {
 		assertEquals(quantidadeRetrieveAll, quantidadeGetQuantidade);
 	}
 	
+	public void testGetById() throws Exception {
+		Entidade entidadeExpected;
+		Entidade entidadeActual;
+		Calendar data = Calendar.getInstance();
+		
+		// Cenário 1: registro encontrado com sucesso.
+		entidadeExpected = getEntidadeValida();
+		entidadeExpected.setNome("Anderson Marinho");
+		entidadeExpected.setId(new Long(5));
+		data.set(2014, 2, 28);
+		entidadeExpected.setDataGravacao(data.getTime());
+		
+		entidadeActual = classeNegocio.getById(new Long(5));
+		
+		assertEquals("Cenário 1: registro encontrado com sucesso.", entidadeExpected.getId(), entidadeActual.getId());
+		
+		// Cenário 2: registro não encontrado.
+		entidadeActual = classeNegocio.getById(new Long(10));
+		
+		assertNull("Cenário 2: registro não encontrado.", entidadeActual);
+	}
+	
 	public void testExcluir() throws Exception {
 		Entidade entidadeEntrada;
 		int quantidadeRegistrosExpected;
@@ -145,9 +168,9 @@ public class EntidadeDAODBUnitTest extends DatabaseTestCase {
 		Entidade entidade = new Entidade();
 		entidade.setNome("Anderson Silva");
 		dataCalendario.set(2014, 5, 1);
-		entidade.setDataInicial(new Date(dataCalendario.getTimeInMillis()));
+		entidade.setDataInicial(dataCalendario.getTime());
 		dataCalendario.set(2014, 5, 31);
-		entidade.setDataFinal(new Date(dataCalendario.getTimeInMillis()));
+		entidade.setDataFinal(dataCalendario.getTime());
 		entidade.setTipoDocumento(1);
 		entidade.setNumeroDocumento(new Long(01123435456));
 		
