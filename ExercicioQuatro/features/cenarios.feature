@@ -85,3 +85,57 @@ Funcionalidade: Detalhes de Deputado
 		E marco a opção "Presença em plenário"
 		E clico sobre o botão "Pesquisar"
 	Então vejo o texto "Nome Parlamentar: ARTUR BRUNO - PT/CE"
+	
+	Cenário: Verificar votações em plenário de deputados
+	Dado Eu sou eleitor buscando informações dos votos em plenário de deputados
+	Quando Eu acesso o site "http://www.camara.leg.br/"
+		E passo o mouse sobre o texto de menu "Deputados"
+		E clico sobre o item de menu "Conheça os Deputados"
+	Então devo ver uma página de pesquisa com texto "Legislatura Atual - Deputados em exercício"
+		E vejo o botão "Pesquisar".
+	Quando Eu seleciono o deputado "Tiririca"
+		E marco a opção "Votações em plenário"
+		E clico sobre o botão "Pesquisar"
+	Então vejo o texto "Nome Parlamentar: TIRIRICA - PR/SP"
+	Quando eu volto para a página de pesquisa
+	Então devo ver uma página de pesquisa com texto "Legislatura Atual - Deputados em exercício"
+		E vejo o botão "Pesquisar".
+	Quando eu seleciono o deputado "Jean Wyllys"
+		E marco a opção "Votações em plenário"
+		E clico sobre o botão "Pesquisar"
+	Então vejo o texto "Nome Parlamentar: JEAN WYLLYS - PSOL/RJ"
+	Quando eu volto para a página de pesquisa
+	Então devo ver uma página de pesquisa com texto "Legislatura Atual - Deputados em exercício"
+		E vejo o botão "Pesquisar".
+	Quando eu seleciono o deputado "João Arruda"
+		E marco a opção "Votações em plenário"
+		E clico sobre o botão "Pesquisar"
+	Então vejo o texto "Nome Parlamentar: JOÃO ARRUDA - PMDB/PR"
+	Quando eu volto para a página de pesquisa
+	Então devo ver uma página de pesquisa com texto "Legislatura Atual - Deputados em exercício"
+		E vejo o botão "Pesquisar".
+	Quando eu seleciono o deputado "Zoinho"
+		E marco a opção "Votações em plenário"
+		E clico sobre o botão "Pesquisar"
+	Então vejo o texto "Nome Parlamentar: ZOINHO - PR/RJ"
+	Quando eu volto para a página de pesquisa
+	Então devo ver uma página de pesquisa com texto "Legislatura Atual - Deputados em exercício"
+		E vejo o botão "Pesquisar".
+	Quando eu seleciono o deputado "Anthony Garotinho"
+		E marco a opção "Votações em plenário"
+		E clico sobre o botão "Pesquisar"
+	Então vejo o texto "Nome Parlamentar: ANTHONY GAROTINHO - PR/RJ"
+	Quando eu volto para a página de pesquisa
+	Então devo ver uma página de pesquisa com texto "Legislatura Atual - Deputados em exercício"
+		E vejo o botão "Pesquisar".
+	Quando eu seleciono o deputado "Ariosto Holanda"
+		E marco a opção "Votações em plenário"
+		E clico sobre o botão "Pesquisar"
+	Então vejo o texto "Nome Parlamentar: ARIOSTO HOLANDA - PROS/CE"
+	Quando eu volto para a página de pesquisa
+	Então devo ver uma página de pesquisa com texto "Legislatura Atual - Deputados em exercício"
+		E vejo o botão "Pesquisar".
+	Quando eu seleciono o deputado "Artur Bruno"
+		E marco a opção "Votações em plenário"
+		E clico sobre o botão "Pesquisar"
+	Então vejo o texto "Nome Parlamentar: ARTUR BRUNO - PT/CE"
