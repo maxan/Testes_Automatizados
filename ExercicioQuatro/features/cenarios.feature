@@ -97,6 +97,7 @@ Funcionalidade: Detalhes de Deputado
 		E marco a opção "Votações em plenário"
 		E clico sobre o botão "Pesquisar"
 	Então vejo o texto "Nome Parlamentar: TIRIRICA - PR/SP"
+		E vejo o título da página "Relatório de Votações em Plenário"
 	Quando eu volto para a página de pesquisa
 	Então devo ver uma página de pesquisa com texto "Legislatura Atual - Deputados em exercício"
 		E vejo o botão "Pesquisar".
@@ -104,6 +105,7 @@ Funcionalidade: Detalhes de Deputado
 		E marco a opção "Votações em plenário"
 		E clico sobre o botão "Pesquisar"
 	Então vejo o texto "Nome Parlamentar: JEAN WYLLYS - PSOL/RJ"
+		E vejo o título da página "Relatório de Votações em Plenário"
 	Quando eu volto para a página de pesquisa
 	Então devo ver uma página de pesquisa com texto "Legislatura Atual - Deputados em exercício"
 		E vejo o botão "Pesquisar".
@@ -111,6 +113,7 @@ Funcionalidade: Detalhes de Deputado
 		E marco a opção "Votações em plenário"
 		E clico sobre o botão "Pesquisar"
 	Então vejo o texto "Nome Parlamentar: JOÃO ARRUDA - PMDB/PR"
+		E vejo o título da página "Relatório de Votações em Plenário"
 	Quando eu volto para a página de pesquisa
 	Então devo ver uma página de pesquisa com texto "Legislatura Atual - Deputados em exercício"
 		E vejo o botão "Pesquisar".
@@ -118,6 +121,7 @@ Funcionalidade: Detalhes de Deputado
 		E marco a opção "Votações em plenário"
 		E clico sobre o botão "Pesquisar"
 	Então vejo o texto "Nome Parlamentar: ZOINHO - PR/RJ"
+		E vejo o título da página "Relatório de Votações em Plenário"
 	Quando eu volto para a página de pesquisa
 	Então devo ver uma página de pesquisa com texto "Legislatura Atual - Deputados em exercício"
 		E vejo o botão "Pesquisar".
@@ -125,6 +129,7 @@ Funcionalidade: Detalhes de Deputado
 		E marco a opção "Votações em plenário"
 		E clico sobre o botão "Pesquisar"
 	Então vejo o texto "Nome Parlamentar: ANTHONY GAROTINHO - PR/RJ"
+		E vejo o título da página "Relatório de Votações em Plenário"
 	Quando eu volto para a página de pesquisa
 	Então devo ver uma página de pesquisa com texto "Legislatura Atual - Deputados em exercício"
 		E vejo o botão "Pesquisar".
@@ -132,6 +137,7 @@ Funcionalidade: Detalhes de Deputado
 		E marco a opção "Votações em plenário"
 		E clico sobre o botão "Pesquisar"
 	Então vejo o texto "Nome Parlamentar: ARIOSTO HOLANDA - PROS/CE"
+		E vejo o título da página "Relatório de Votações em Plenário"
 	Quando eu volto para a página de pesquisa
 	Então devo ver uma página de pesquisa com texto "Legislatura Atual - Deputados em exercício"
 		E vejo o botão "Pesquisar".
@@ -139,3 +145,4 @@ Funcionalidade: Detalhes de Deputado
 		E marco a opção "Votações em plenário"
 		E clico sobre o botão "Pesquisar"
 	Então vejo o texto "Nome Parlamentar: ARTUR BRUNO - PT/CE"
+		E vejo o título da página "Relatório de Votações em Plenário"
