@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://www2.camara.leg.br/" />
+<title>ExercicioQuatro_Cenario1</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ExercicioQuatro_Cenario1</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Conheça os Deputados</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Conheça os Deputados</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='content']/div/div[2]/h6</td>
+	<td>Pesquisa de Deputados</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=Pesquisa2</td>
+	<td>Pesquisar</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=nome</td>
+	<td>Tiririca</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=uf</td>
+	<td>label=SP</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=Pesquisa2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=ul.visualNoMarker &gt; li</td>
+	<td>Nome civil: FRANCISCO EVERARDO OLIVEIRA SILVA</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Projetos de sua autoria</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='frmListaProp']/table/tbody[21]/tr[2]/td[2]/p[2]</td>
+	<td>Data de apresentação: 7/6/2011<br />Ementa: Altera a Lei nº 10.753, de 30 de outubro de 2003, que institui a Política Nacional do Livro, para dispor sobre a criação do Vale-Livro.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=próxima</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://www.camara.gov.br/internet/sileg/Prop_lista.asp?Pagina=2&amp;Autor=530193&amp;Limite=N</td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=ul.visualNoMarker &gt; li</td>
+	<td>Nome civil: FRANCISCO EVERARDO OLIVEIRA SILVA</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Discursos em plenário</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTitle</td>
+	<td>Discursos e Notas Taquigráficas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Retorna a pesquisa.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=ul.visualNoMarker &gt; li</td>
+	<td>Nome civil: FRANCISCO EVERARDO OLIVEIRA SILVA</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Biografia</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='bioDeputado']/div[9]/div[2]</td>
+	<td>SILVA, Francisco Everardo Oliveira (Co-autor). As Piadas fantárdigas do Tiririca. São Paulo: Matrix, 2006.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a[title=&quot;Proposições Transformadas em Norma Jurídica&quot;] &gt; b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=span.nomeProposicao</td>
+	<td>PL 4682/2012</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//a[contains(text(),'Atividade Legislativa')])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=a[alt=&quot;Agenda&quot;]</td>
+	<td>Agenda</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=a[alt=&quot;Comissões&quot;]</td>
+	<td>Comissões</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=a[alt=&quot;Conheça o Processo Legislativo&quot;]</td>
+	<td>Conheça o Processo Legislativo</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

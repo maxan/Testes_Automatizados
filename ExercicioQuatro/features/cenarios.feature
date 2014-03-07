@@ -16,11 +16,11 @@ Funcionalidade: Detalhes de Deputado
 	Quando Eu clico sobre o link "Projetos de sua autoria"
 	Então vejo uma página com o texto "Ementa: Altera a Lei nº 10.753, de 30 de outubro de 2003, que institui a Política Nacional do Livro, para dispor sobre a criação do Vale-Livro."
 	Quando Eu clico sobre o link "próxima"
-	Então vejo o texto "Solicita informações ao Senhor Ministro de Estado da Educação" duas vezes.
+	Então vejo a página dois.
 	Quando Eu volto para a página de detalhes do deputado
 	Então vejo o texto "Nome civil: FRANCISCO EVERARDO OLIVEIRA SILVA"
 	Quando Eu clico sobre o link "Discursos em plenário"
-	Então vejo o texto "Nenhum discurso encontrado."
+	Então vejo a página de "Discursos e Notas Taquigráficas" do deputado.
 	Quando Eu clico sobre o texto "Retorna a pesquisa."
 	Então vejo o texto "Nome civil: FRANCISCO EVERARDO OLIVEIRA SILVA"
 	Quando Eu clico sobre o link "Biografia"
