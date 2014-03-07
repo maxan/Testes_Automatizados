@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://www2.camara.leg.br/" />
+<title>ExercicioQuatro_Selenium_Cenario2</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ExercicioQuatro_Selenium_Cenario2</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Conheça os Deputados</td>
+	<td>Conheça os Deputados</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Conheça os Deputados</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h6.header</td>
+	<td>Legislatura Atual - Deputados em exercício</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=Pesquisa</td>
+	<td>Pesquisar</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=deputado</td>
+	<td>label=TIRIRICA</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=rbDeputado6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=Pesquisa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Nome Parlamentar: TIRIRICA - PR/SP</td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h6.header</td>
+	<td>Legislatura Atual - Deputados em exercício</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=Pesquisa</td>
+	<td>Pesquisar</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=deputado</td>
+	<td>label=JEAN WYLLYS</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=rbDeputado6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=Pesquisa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Nome Parlamentar: JEAN WYLLYS - PSOL/RJ</td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h6.header</td>
+	<td>Legislatura Atual - Deputados em exercício</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=Pesquisa</td>
+	<td>Pesquisar</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=deputado</td>
+	<td>label=JOÃO ARRUDA</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=rbDeputado6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=Pesquisa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Nome Parlamentar: JOÃO ARRUDA - PMDB/PR</td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h6.header</td>
+	<td>Legislatura Atual - Deputados em exercício</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=Pesquisa</td>
+	<td>Pesquisar</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=deputado</td>
+	<td>label=ZOINHO</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=rbDeputado6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=Pesquisa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Nome Parlamentar: ZOINHO - PR/RJ</td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h6.header</td>
+	<td>Legislatura Atual - Deputados em exercício</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=Pesquisa</td>
+	<td>Pesquisar</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=deputado</td>
+	<td>label=ANTHONY GAROTINHO</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=rbDeputado6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=Pesquisa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Nome Parlamentar: ANTHONY GAROTINHO - PR/RJ</td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h6.header</td>
+	<td>Legislatura Atual - Deputados em exercício</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=Pesquisa</td>
+	<td>Pesquisar</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=deputado</td>
+	<td>label=ARIOSTO HOLANDA</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=rbDeputado6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=Pesquisa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Nome Parlamentar: ARIOSTO HOLANDA - PROS/CE</td>
+</tr>
+<tr>
+	<td>goBackAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h6.header</td>
+	<td>Legislatura Atual - Deputados em exercício</td>
+</tr>
+<tr>
+	<td>waitForValue</td>
+	<td>id=Pesquisa</td>
+	<td>Pesquisar</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=deputado</td>
+	<td>label=ARTUR BRUNO</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=rbDeputado6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=Pesquisa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Nome Parlamentar: ARTUR BRUNO - PT/CE</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
