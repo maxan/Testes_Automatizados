@@ -549,6 +549,436 @@ public class Cenarios {
     }
   }
 
+  @Test
+  public void testCenarioTres() throws Exception {
+    driver.get(baseUrl);
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Conheça os Deputados".equals(driver.findElement(By.linkText("Conheça os Deputados")).getText())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    driver.findElement(By.linkText("Conheça os Deputados")).click();
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Legislatura Atual - Deputados em exercício".equals(driver.findElement(By.cssSelector("h6.header")).getText())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Pesquisar".equals(driver.findElement(By.id("Pesquisa")).getAttribute("value"))) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    new Select(driver.findElement(By.id("deputado"))).selectByVisibleText("TIRIRICA");
+    
+    driver.findElement(By.id("rbDeputado5")).click();
+    driver.findElement(By.id("Pesquisa")).click();
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Nome Parlamentar: TIRIRICA - PR/SP".equals(driver.findElement(By.cssSelector("#content > h3")).getText())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Relatório de Votações em Plenário".equals(driver.getTitle())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    driver.navigate().back();
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Legislatura Atual - Deputados em exercício".equals(driver.findElement(By.cssSelector("h6.header")).getText())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Pesquisar".equals(driver.findElement(By.id("Pesquisa")).getAttribute("value"))) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    new Select(driver.findElement(By.id("deputado"))).selectByVisibleText("JEAN WYLLYS");
+    
+    driver.findElement(By.id("rbDeputado5")).click();
+    driver.findElement(By.id("Pesquisa")).click();
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Nome Parlamentar: JEAN WYLLYS - PSOL/RJ".equals(driver.findElement(By.cssSelector("#content > h3")).getText())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Relatório de Votações em Plenário".equals(driver.getTitle())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    driver.navigate().back();
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Legislatura Atual - Deputados em exercício".equals(driver.findElement(By.cssSelector("h6.header")).getText())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Pesquisar".equals(driver.findElement(By.id("Pesquisa")).getAttribute("value"))) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    new Select(driver.findElement(By.id("deputado"))).selectByVisibleText("JOÃO ARRUDA");
+    
+    driver.findElement(By.id("rbDeputado5")).click();
+    driver.findElement(By.id("Pesquisa")).click();
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Nome Parlamentar: JOÃO ARRUDA - PMDB/PR".equals(driver.findElement(By.cssSelector("#content > h3")).getText())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    driver.navigate().back();
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Legislatura Atual - Deputados em exercício".equals(driver.findElement(By.cssSelector("h6.header")).getText())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Pesquisar".equals(driver.findElement(By.id("Pesquisa")).getAttribute("value"))) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    new Select(driver.findElement(By.id("deputado"))).selectByVisibleText("ZOINHO");
+    
+    driver.findElement(By.id("rbDeputado5")).click();
+    driver.findElement(By.id("Pesquisa")).click();
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Nome Parlamentar: ZOINHO - PR/RJ".equals(driver.findElement(By.cssSelector("#content > h3")).getText())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Relatório de Votações em Plenário".equals(driver.getTitle())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    driver.navigate().back();
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Legislatura Atual - Deputados em exercício".equals(driver.findElement(By.cssSelector("h6.header")).getText())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Pesquisar".equals(driver.findElement(By.id("Pesquisa")).getAttribute("value"))) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    new Select(driver.findElement(By.id("deputado"))).selectByVisibleText("ANTHONY GAROTINHO");
+    
+    driver.findElement(By.id("rbDeputado5")).click();
+    driver.findElement(By.id("Pesquisa")).click();
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Nome Parlamentar: ANTHONY GAROTINHO - PR/RJ".equals(driver.findElement(By.cssSelector("#content > h3")).getText())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Relatório de Votações em Plenário".equals(driver.getTitle())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    driver.navigate().back();
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Legislatura Atual - Deputados em exercício".equals(driver.findElement(By.cssSelector("h6.header")).getText())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Pesquisar".equals(driver.findElement(By.id("Pesquisa")).getAttribute("value"))) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    new Select(driver.findElement(By.id("deputado"))).selectByVisibleText("ARIOSTO HOLANDA");
+    
+    driver.findElement(By.id("rbDeputado5")).click();
+    driver.findElement(By.id("Pesquisa")).click();
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) fail("timeout");
+    	try { if ("Nome Parlamentar: ARIOSTO HOLANDA - PROS/CE".equals(driver.findElement(By.cssSelector("#content > h3")).getText())) break; } catch (Exception e) {}
+    	Thread.sleep(1000);
+    }
+
+    for (int second = 0;; second++) {
+    	if (second >= 60) fail("timeout");
+    	try { if ("Relatório de Votações em Plenário".equals(driver.getTitle())) break; } catch (Exception e) {}
+    	Thread.sleep(1000);
+    }
+
+    driver.navigate().back();
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Legislatura Atual - Deputados em exercício".equals(driver.findElement(By.cssSelector("h6.header")).getText())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Pesquisar".equals(driver.findElement(By.id("Pesquisa")).getAttribute("value"))) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    new Select(driver.findElement(By.id("deputado"))).selectByVisibleText("ARTUR BRUNO");
+    
+    driver.findElement(By.id("rbDeputado5")).click();
+    driver.findElement(By.id("Pesquisa")).click();
+    
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Nome Parlamentar: ARTUR BRUNO - PT/CE".equals(driver.findElement(By.cssSelector("#content > h3")).getText())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+
+    for (int second = 0;; second++) {
+    	if (second >= 60) 
+    		fail("timeout");
+    	
+    	try { 
+    		if ("Relatório de Votações em Plenário".equals(driver.getTitle())) 
+    			break; 
+		} catch (Exception e) {
+			//
+		}
+    	
+    	Thread.sleep(1000);
+    }
+  }
+  
   @After
   public void tearDown() throws Exception {
     driver.quit();
